@@ -79,11 +79,15 @@
 
 
 
-<meta property="og:type" content="website">
+<meta name="description" content="接下来利用我们当前的知识（进程基础），撰写一个简单的shell外壳程序。 1.shell原理shell的原理是实际上就是运行了一个父进程，然后创建出子进程，最后使用进程替换调用，替换成其他程序。 2.shell实现2.1.死循环首先一个shell一旦运行起来就不会关闭（除非关闭终端窗口），因此一定是一个死循环。 12345678int main()&#123;	while(1)    &#123;">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/2023/12/01/%E9%A2%9D%E5%A4%96%E8%A1%A5%E5%85%85%EF%BC%9A%E7%AE%80%E6%98%93shell%E5%B0%8F%E9%A1%B9%E7%9B%AE/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="接下来利用我们当前的知识（进程基础），撰写一个简单的shell外壳程序。 1.shell原理shell的原理是实际上就是运行了一个父进程，然后创建出子进程，最后使用进程替换调用，替换成其他程序。 2.shell实现2.1.死循环首先一个shell一旦运行起来就不会关闭（除非关闭终端窗口），因此一定是一个死循环。 12345678int main()&#123;	while(1)    &#123;">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-12-01T07:18:17.244Z">
+<meta property="article:modified_time" content="2023-11-29T14:42:44.146Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/"/>
+  <link rel="canonical" href="http://example.com/2023/12/01/额外补充：简易shell小项目/"/>
 
 
 
 
 
-  <title>Hexo</title>
+  <title> | Hexo</title>
   
 
 
@@ -140,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,9 +217,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -246,9 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/12/01/%E9%A2%9D%E5%A4%96%E8%A1%A5%E5%85%85%EF%BC%9A%E7%AE%80%E6%98%93shell%E5%B0%8F%E9%A1%B9%E7%9B%AE/" itemprop="url">Untitled</a></h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -298,9 +299,7 @@
       
 
       
-        
-          
-            <p>接下来利用我们当前的知识（进程基础），撰写一个简单的<code>shell</code>外壳程序。</p>
+        <p>接下来利用我们当前的知识（进程基础），撰写一个简单的<code>shell</code>外壳程序。</p>
 <h1 id="1-shell原理"><a href="#1-shell原理" class="headerlink" title="1.shell原理"></a>1.shell原理</h1><p><code>shell</code>的原理是实际上就是运行了一个父进程，然后创建出子进程，最后使用进程替换调用，替换成其他程序。</p>
 <h1 id="2-shell实现"><a href="#2-shell实现" class="headerlink" title="2.shell实现"></a>2.shell实现</h1><h2 id="2-1-死循环"><a href="#2-1-死循环" class="headerlink" title="2.1.死循环"></a>2.1.死循环</h2><p>首先一个<code>shell</code>一旦运行起来就不会关闭（除非关闭终端窗口），因此一定是一个死循环。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -341,8 +340,6 @@
 <h2 id="3-6-支持重定向"><a href="#3-6-支持重定向" class="headerlink" title="3.6.支持重定向"></a>3.6.支持重定向</h2><p>这一部分需要您查看本系列的《<code>Linux</code>的<code>IO</code>基础》，这里主要是支持了重定向的相关操作，涉及到文件结构和<code>IO</code>操作。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ctype.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NUM 1024</span></span><br><span class="line"><span class="type">char</span> cmd_line[NUM];<span class="comment">//保存完整命令字符串</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIZE 32</span></span><br><span class="line"><span class="type">char</span>* g_argv[SIZE];<span class="comment">//保存打散后的命令字符串，是一个数组</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SEP <span class="string">&quot; &quot;</span><span class="comment">//分隔符</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NONE_REDIR 0<span class="comment">//无重定向</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OUTPUT_REDIR 1<span class="comment">//输入重定向</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> APPEND_REDIR 2<span class="comment">//追加重定向</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INPUT_REDIR 3<span class="comment">//输出重定向</span></span></span><br><span class="line"><span class="type">int</span> redir = NONE_REDIR;<span class="comment">//默认没有重定向</span></span><br><span class="line"><span class="type">char</span>* filename = <span class="literal">NULL</span>;<span class="comment">//重定向所需的文件</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SkipSpace(pos) do &#123; while(isspace(*pos)) pos++; &#125; while(0)<span class="comment">//使字符型跳过空格的宏函数</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> cwd[<span class="number">1024</span>];<span class="comment">//设置pwd环境变量</span></span><br><span class="line"><span class="type">char</span> new_env[<span class="number">1024</span>];<span class="comment">//设置新增加的环境变量</span></span><br><span class="line"><span class="type">int</span> lats_code = <span class="number">0</span>;<span class="comment">//最近一次</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">const</span> <span class="type">char</span>* <span class="title">GetUserName</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//获取用户名字</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* userName = <span class="built_in">getenv</span>(<span class="string">&quot;USER&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(userName) </span><br><span class="line">        <span class="keyword">return</span> userName;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;none&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">const</span> <span class="type">char</span>* <span class="title">GetHostName</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//获取主机名字</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* hostName = <span class="built_in">getenv</span>(<span class="string">&quot;HOSTNAME&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(hostName)</span><br><span class="line">        <span class="keyword">return</span> hostName;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;none&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">const</span> <span class="type">char</span>* <span class="title">GetPwd</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//获取路径地址</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* pwd = <span class="built_in">getenv</span>(<span class="string">&quot;PWD&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(pwd)</span><br><span class="line">        <span class="keyword">return</span> pwd;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;none&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Print</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//打印提示信息</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[%s@%s %s]$ &quot;</span>, <span class="built_in">GetUserName</span>(), <span class="built_in">GetHostName</span>(), <span class="built_in">GetPwd</span>());</span><br><span class="line">    <span class="built_in">fflush</span>(stdout);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">GetUserCommand</span><span class="params">()</span><span class="comment">//获取 user 的输入</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(cmd_line, <span class="string">&#x27;\0&#x27;</span>, <span class="built_in">sizeof</span>(cmd_line));<span class="comment">//设定初始值</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">fgets</span>(cmd_line, <span class="built_in">sizeof</span>(cmd_line), stdin) == <span class="literal">NULL</span>)<span class="comment">//获取字符串，不能使用 scanf()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//出错就直接跳出循环</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cmd_line[<span class="built_in">strlen</span>(cmd_line) - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;<span class="comment">//将用户输入的字符串去掉 \n</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strlen</span>(cmd_line) == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">CheckRedir</span><span class="params">()</span><span class="comment">//检查用户的命令是否含有重定向</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">char</span>* end = cmd_line + <span class="built_in">sizeof</span>(cmd_line) - <span class="number">1</span>;</span><br><span class="line">    <span class="type">char</span>* start = cmd_line;</span><br><span class="line">    <span class="keyword">while</span>(end &gt;= start)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(*end == <span class="string">&#x27;&gt;&#x27;</span>)<span class="comment">//输出重定向和追加重定向</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(*(end - <span class="number">1</span>) == <span class="string">&#x27;&gt;&#x27;</span>)<span class="comment">//追加重定向</span></span><br><span class="line">            &#123;</span><br><span class="line">                *(end - <span class="number">1</span>) = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">                filename = end + <span class="number">1</span>;</span><br><span class="line">                <span class="built_in">SkipSpace</span>(filename);</span><br><span class="line">                redir = APPEND_REDIR;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span><span class="comment">//输出重定向</span></span><br><span class="line">            &#123;</span><br><span class="line">                *end = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">                filename = end + <span class="number">1</span>;</span><br><span class="line">                <span class="built_in">SkipSpace</span>(filename);</span><br><span class="line">                redir = OUTPUT_REDIR;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(*end == <span class="string">&#x27;&lt;&#x27;</span>)<span class="comment">//输入重定向</span></span><br><span class="line">        &#123;</span><br><span class="line">            *end = <span class="string">&#x27;\0&#x27;</span>;<span class="comment">//前半部分无所谓，交给后面的函数</span></span><br><span class="line">            filename = end + <span class="number">1</span>;<span class="comment">//filename 作为重定向所需的文件</span></span><br><span class="line">            <span class="built_in">SkipSpace</span>(filename);<span class="comment">//有空格就跳过，避免用户在重定向符号和指向文件直接有空格存在</span></span><br><span class="line">            redir = INPUT_REDIR;<span class="comment">//标记为输入重定向</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            end--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AnalyzeStr</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//命令行字符解析</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//虽然可以自己写一个算法解析，但是我们可以使用一些现有的接口</span></span><br><span class="line">    g_argv[<span class="number">0</span>] = <span class="built_in">strtok</span>(cmd_line, SEP);<span class="comment">//第一次调用需要传入原始字符串和分隔符</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> index = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//处理特殊的命令情况</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(g_argv[<span class="number">0</span>], <span class="string">&quot;ls&quot;</span>) == <span class="number">0</span>)<span class="comment">//如果输入的命令是 ls 就进行一些特殊处理</span></span><br><span class="line">    &#123;</span><br><span class="line">        g_argv[index++] = <span class="string">&quot;--color=auto&quot;</span>;<span class="comment">//增加颜色参数，让输出带有颜色</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(g_argv[index++] = <span class="built_in">strtok</span>(<span class="literal">NULL</span>, SEP));<span class="comment">//第二次还想要解析原始字符串，就需要传入 NULL</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">DoBuildin</span><span class="params">()</span><span class="comment">//处理内建命令</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//内建命令 cd</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(g_argv[<span class="number">0</span>], <span class="string">&quot;cd&quot;</span>) == <span class="number">0</span>)   </span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;父进程 run:\n&quot;</span>);</span><br><span class="line">        <span class="comment">//更改路径的命令</span></span><br><span class="line">        <span class="type">char</span>* path = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span>(g_argv[<span class="number">1</span>] == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            path = <span class="string">&quot;.&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            path = g_argv[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">chdir</span>(path);</span><br><span class="line">        </span><br><span class="line">        <span class="type">char</span> tmp[<span class="number">1024</span>];</span><br><span class="line">        <span class="built_in">getcwd</span>(tmp, <span class="built_in">sizeof</span>(tmp));<span class="comment">//获取当前进程所在的地址（工作目录）</span></span><br><span class="line">        <span class="built_in">sprintf</span>(cwd, <span class="string">&quot;PWD=%s&quot;</span>, tmp);<span class="comment">//组合环境变量</span></span><br><span class="line">        <span class="built_in">putenv</span>(cwd);<span class="comment">//设置环境变量</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//内建命令 export</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(g_argv[<span class="number">0</span>], <span class="string">&quot;export&quot;</span>) == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(g_argv[<span class="number">1</span>] == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">strcpy</span>(new_env, g_argv[<span class="number">1</span>]);</span><br><span class="line">        <span class="built_in">putenv</span>(new_env);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//内建命令 echo</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(g_argv[<span class="number">0</span>], <span class="string">&quot;echo&quot;</span>) == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(*g_argv[<span class="number">1</span>] == <span class="string">&#x27;$&#x27;</span>)<span class="comment">//特殊命令（查找环境变量和打印最近一次进程的返回值）</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">char</span>* val = g_argv[<span class="number">1</span>] + <span class="number">1</span>;<span class="comment">//这个指针指向的就是 $PATH 或者 $? 中的 PATH 和 ?</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">strcmp</span>(val, <span class="string">&quot;?&quot;</span>) == <span class="number">0</span>)<span class="comment">//查看退出码</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, lats_code);</span><br><span class="line">                lats_code = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span><span class="comment">//查看环境变量</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, <span class="built_in">getenv</span>(val));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">//一般命令（如果不是特殊的命令就直接退出交给后续的程序替换即可）</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">RunCommand</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//fork() 创建子进程，execvp() 替换子进程</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">pid_t</span> id = fork();</span><br><span class="line">    <span class="keyword">if</span>(id == <span class="number">0</span>)<span class="comment">//child</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//查看是否需要重定向</span></span><br><span class="line">        <span class="type">int</span> fd = <span class="number">0</span>;  </span><br><span class="line">        <span class="keyword">if</span>(redir == INPUT_REDIR)<span class="comment">//输入重定向</span></span><br><span class="line">        &#123;</span><br><span class="line">            fd = <span class="built_in">open</span>(filename, O_RDONLY);<span class="comment">//只读</span></span><br><span class="line">            <span class="built_in">dup2</span>(fd, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(redir == OUTPUT_REDIR)<span class="comment">//输出重定向</span></span><br><span class="line">        &#123;</span><br><span class="line">            fd = <span class="built_in">open</span>(filename, O_WRONLY | O_CREAT | O_TRUNC, <span class="number">0666</span>);<span class="comment">//只写、不存在就创建、输出时清空</span></span><br><span class="line">            <span class="built_in">dup2</span>(fd, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(redir == APPEND_REDIR)<span class="comment">//追加重定向</span></span><br><span class="line">        &#123;</span><br><span class="line">            fd = <span class="built_in">open</span>(filename, O_WRONLY | O_CREAT | O_APPEND, <span class="number">0666</span>);<span class="comment">//只写、不存在就创建、输出时追加</span></span><br><span class="line">            <span class="built_in">dup2</span>(fd, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//do nothing</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//printf(&quot;子进程 run:\n&quot;);</span></span><br><span class="line">        <span class="built_in">execvp</span>(g_argv[<span class="number">0</span>], g_argv);<span class="comment">//自动在环境变量中搜索 g_argv[0] 的文件，执行 g_argv 数组存储的指令</span></span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);<span class="comment">//没替换成功就会异常退出</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        这里需要注意一个问题：程序替换会不会影响重定向呢？答案是不会，为什么呢？</span></span><br><span class="line"><span class="comment">        一个子进程进程拥有自己的 task_struct 对象，有两份资源，一份是虚拟地址空间，一份是文件指针数组 fd_array[]</span></span><br><span class="line"><span class="comment">        由于程序替换只是资源替换但保留原有子进程，因此两者的替换是独立的，不会互相干扰，替换后重定向的结果仍旧不变</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//father</span></span><br><span class="line">        <span class="type">int</span> status = <span class="number">0</span>;</span><br><span class="line">        <span class="type">pid_t</span> ret = <span class="built_in">waitpid</span>(id, &amp;status, <span class="number">0</span>);<span class="comment">//阻塞等待</span></span><br><span class="line">        <span class="keyword">if</span>(ret &gt; <span class="number">0</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            lats_code = <span class="built_in">WEXITSTATUS</span>(status);<span class="comment">//最近一次运行子进程的退出码</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        redir = NONE_REDIR;</span><br><span class="line">        filename = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1.打印提示信息</span></span><br><span class="line">        <span class="built_in">Print</span>();</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//2.获取 user 的输入</span></span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">GetUserCommand</span>())</span><br><span class="line">            <span class="keyword">continue</span>;<span class="comment">//没有获取到就回到循环开始</span></span><br><span class="line">        <span class="comment">//检测是否发生了重定向</span></span><br><span class="line">        <span class="built_in">CheckRedir</span>();        </span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.命令行字符解析</span></span><br><span class="line">        <span class="built_in">AnalyzeStr</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.处理内建命令</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">DoBuildin</span>())</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//5.fork() 创建子进程，execvp() 替换子进程</span></span><br><span class="line">        <span class="built_in">RunCommand</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-          
-        
       
     </div>
     
@@ -359,144 +356,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/01/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/12/01/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-12-01T14:50:56+08:00">
-                2023-12-01
-              </time>
+              <a href="/2023/12/01/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -506,10 +387,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -517,6 +399,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -537,8 +423,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -580,6 +475,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-shell%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">1.shell原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-shell%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">2.shell实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E6%AD%BB%E5%BE%AA%E7%8E%AF"><span class="nav-number">2.1.</span> <span class="nav-text">2.1.死循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%8F%90%E7%A4%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.2.</span> <span class="nav-text">2.2.提示字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5"><span class="nav-number">2.3.</span> <span class="nav-text">2.3.获取用户输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E8%A7%A3%E6%9E%90%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5"><span class="nav-number">2.4.</span> <span class="nav-text">2.4.解析用户输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-%E5%88%9B%E5%BB%BA%E5%B9%B6%E4%B8%94%E6%9B%BF%E6%8D%A2%E5%AD%90%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.5.</span> <span class="nav-text">2.5.创建并且替换子进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-debug"><span class="nav-number">2.6.</span> <span class="nav-text">2.6.debug</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-shell%E6%8B%93%E5%B1%95"><span class="nav-number">3.</span> <span class="nav-text">3.shell拓展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E7%94%A8%E6%88%B7%E5%90%8D%E3%80%81%E4%B8%BB%E6%9C%BA%E5%90%8D%E3%80%81%E7%9B%AE%E5%BD%95%E8%8E%B7%E5%8F%96"><span class="nav-number">3.1.</span> <span class="nav-text">3.1.用户名、主机名、目录获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%B0%81%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.2.</span> <span class="nav-text">3.2.封装步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-debug"><span class="nav-number">3.3.</span> <span class="nav-text">3.3.debug</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-%E6%97%A0%E6%B3%95%E7%9B%B4%E6%8E%A5%E8%BE%93%E5%85%A5%E6%8D%A2%E8%A1%8C"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.3.1.无法直接输入换行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-%E6%97%A0%E6%B3%95%E5%88%87%E6%8D%A2%E5%AF%B9%E5%BA%94%E7%9B%AE%E5%BD%95"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.3.2.无法切换对应目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-%E6%97%A0%E6%B3%95%E6%9B%B4%E6%94%B9%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.3.3.无法更改环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E6%9B%B4%E5%A4%9A%E5%86%85%E5%BB%BA%E5%91%BD%E4%BB%A4"><span class="nav-number">3.4.</span> <span class="nav-text">3.4.更多内建命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-%E7%94%A8echo%E6%89%93%E5%8D%B0%E6%9C%80%E8%BF%91%E4%B8%80%E6%AC%A1%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">3.5.</span> <span class="nav-text">3.5.用echo打印最近一次返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-%E6%94%AF%E6%8C%81%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">3.6.</span> <span class="nav-text">3.6.支持重定向</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -713,6 +624,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
