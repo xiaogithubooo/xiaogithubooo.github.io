@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.vector简介vector说明白点就是一个顺序表，一个可以进行动态存储的数组，在学习vector之前，您要对顺序表有足够的了解，最好是造过“轮子”。 vector就像数组一样，对其中内部元素使用连续的存储位置，可以使用常规指针的偏移量来访问元素，但是和普通数组不同的是，vector序列容器的大小可以动态变化。 不过需要注意的是vector是一个类模板，而不是我们之前提到的string一样一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/12/01/012+limou+2023_8_12+C++%E7%9A%84vector%E7%B1%BB%E6%A8%A1%E6%9D%BF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.vector简介vector说明白点就是一个顺序表，一个可以进行动态存储的数组，在学习vector之前，您要对顺序表有足够的了解，最好是造过“轮子”。 vector就像数组一样，对其中内部元素使用连续的存储位置，可以使用常规指针的偏移量来访问元素，但是和普通数组不同的是，vector序列容器的大小可以动态变化。 不过需要注意的是vector是一个类模板，而不是我们之前提到的string一样一个">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-12-01T08:34:49.472Z">
+<meta property="article:modified_time" content="2023-08-14T10:45:18.308Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2023/12/01/012+limou+2023_8_12+C++的vector类模板/"/>
+
+
+
+
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/01/012+limou+2023_8_12+C++%E7%9A%84vector%E7%B1%BB%E6%A8%A1%E6%9D%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-12-01T16:34:49+08:00">
+                2023-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-vector简介"><a href="#1-vector简介" class="headerlink" title="1.vector简介"></a>1.vector简介</h1><p><code>vector</code>说明白点就是一个顺序表，一个可以进行动态存储的数组，在学习<code>vector</code>之前，您要对顺序表有足够的了解，最好是造过“轮子”。</p>
+<p><code>vector</code>就像数组一样，对其中内部元素使用连续的存储位置，可以使用常规指针的偏移量来访问元素，但是和普通数组不同的是，<code>vector</code>序列容器的大小可以动态变化。</p>
+<p>不过需要注意的是<code>vector</code>是一个类模板，而不是我们之前提到的<code>string</code>一样一个经过实例化的类。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Alloc</span> = allocator&lt;T&gt; &gt; <span class="keyword">class</span> vector;<span class="comment">//类模板声明</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2-成员类型（Member-types）"><a href="#2-成员类型（Member-types）" class="headerlink" title="2.成员类型（Member types）"></a>2.成员类型（Member types）</h1><ol>
+<li><p><code>T</code>是类模板的模板类型，由使用者决定</p>
+</li>
+<li><p><code>Alloc</code>参数是有关空间配置器相关的设计，这个我们暂时不用理会，这个参数是方便使用者改写空间配置器，但是基本很少改动</p>
+</li>
+</ol>
+<h1 id="3-成员函数（Member-function）"><a href="#3-成员函数（Member-function）" class="headerlink" title="3.成员函数（Member function）"></a>3.成员函数（Member function）</h1><h2 id="3-1-构造函数vector"><a href="#3-1-构造函数vector" class="headerlink" title="3.1.构造函数vector()"></a>3.1.构造函数vector()</h2><h3 id="3-1-1-default-1-默认"><a href="#3-1-1-default-1-默认" class="headerlink" title="3.1.1.default (1) 默认"></a>3.1.1.default (1) 默认</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">vector</span> <span class="params">(<span class="type">const</span> allocator_type&amp; alloc = allocator_type())</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-2-fill-2-填充"><a href="#3-1-2-fill-2-填充" class="headerlink" title="3.1.2.fill (2) 填充"></a>3.1.2.fill (2) 填充</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">vector</span> <span class="params">(size_type n)</span></span>; </span><br><span class="line"><span class="built_in">vector</span> (size_type n, <span class="type">const</span> value_type&amp; val, <span class="type">const</span> allocator_type&amp; alloc = <span class="built_in">allocator_type</span>());</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-3-range-3-范围"><a href="#3-1-3-range-3-范围" class="headerlink" title="3.1.3.range (3) 范围"></a>3.1.3.range (3) 范围</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">InputIterator</span>&gt;</span><br><span class="line">  <span class="built_in">vector</span> (InputIterator first, InputIterator last, <span class="type">const</span> allocator_type&amp; alloc = <span class="built_in">allocator_type</span>());</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-4-copy-4-副本"><a href="#3-1-4-copy-4-副本" class="headerlink" title="3.1.4.copy (4) 副本"></a>3.1.4.copy (4) 副本</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> (<span class="type">const</span> vector&amp; x);</span><br><span class="line"><span class="built_in">vector</span> (<span class="type">const</span> vector&amp; x, <span class="type">const</span> allocator_type&amp; alloc);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-5-move-5-移动-（5）"><a href="#3-1-5-move-5-移动-（5）" class="headerlink" title="3.1.5.move (5) 移动 （5）"></a>3.1.5.move (5) 移动 （5）</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> (vector&amp;&amp; x);</span><br><span class="line"><span class="built_in">vector</span> (vector&amp;&amp; x, <span class="type">const</span> allocator_type&amp; alloc);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-6-initializer-list-6-初始值设定项列表-（6）"><a href="#3-1-6-initializer-list-6-初始值设定项列表-（6）" class="headerlink" title="3.1.6.initializer list (6) 初始值设定项列表 （6）"></a>3.1.6.initializer list (6) 初始值设定项列表 （6）</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> (initializer_list&lt;value_type&gt; il, <span class="type">const</span> allocator_type&amp; alloc = <span class="built_in">allocator_type</span>());</span><br></pre></td></tr></table></figure>
+
+<p>在有使用过<code>string</code>类对象的基础上，我们加快一些进度，下面是构造函数的使用例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//vector (const allocator_type&amp; alloc = allocator_type());</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; v1;<span class="comment">//(1)默认创建一个空的vector容器</span></span><br><span class="line">    <span class="comment">//vector (size_type n);</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">double</span>&gt; <span class="title">v2</span><span class="params">(<span class="number">10</span>)</span></span>;<span class="comment">//(2)创建一个大小位10的vector容器</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//vector(size_type n, const value_type &amp; val, const allocator_type &amp; alloc = allocator_type());</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">char</span>&gt; <span class="title">v3</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>;<span class="comment">//(2)创建一个大小位10的vector容器</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//&lt;class InputIterator&gt; </span></span><br><span class="line">    <span class="comment">//vector (InputIterator first, InputIterator last, const allocator_type&amp; alloc = allocator_type());</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">char</span>&gt; <span class="title">v4</span><span class="params">(v3.begin() + <span class="number">1</span>, v3.end() - <span class="number">1</span>)</span></span>;<span class="comment">//(3)</span></span><br><span class="line">    <span class="function">string <span class="title">str</span><span class="params">(<span class="string">&quot;abcdef&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">char</span>&gt; <span class="title">vec</span><span class="params">(str.begin() + <span class="number">1</span>, str.end() - <span class="number">1</span>)</span></span>;<span class="comment">//(3)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//vector(const vector &amp; x);</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">char</span>&gt; <span class="title">v5</span><span class="params">(v3)</span></span>;<span class="comment">//(4)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//vector (vector&amp;&amp; x);</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">char</span>&gt; <span class="title">v6</span><span class="params">(move(v3))</span></span>;<span class="comment">//(5)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//vector (initializer_list&lt;value_type&gt; il, const allocator_type&amp; alloc = allocator_type());</span></span><br><span class="line">    vector&lt;<span class="type">float</span>&gt; v7&#123;<span class="number">1</span>, <span class="number">3.1</span>, <span class="number">2.3</span>, <span class="number">4.5</span>&#125;;<span class="comment">//(6)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-析构函数-vecter"><a href="#3-2-析构函数-vecter" class="headerlink" title="3.2.析构函数~vecter()"></a>3.2.析构函数~vecter()</h2><p>就是销毁<code>vecter</code>容器对象。</p>
+<h2 id="3-3-赋值重载"><a href="#3-3-赋值重载" class="headerlink" title="3.3.赋值重载"></a>3.3.赋值重载</h2><h3 id="3-3-1-copy-1-副本"><a href="#3-3-1-copy-1-副本" class="headerlink" title="3.3.1.copy (1) 副本"></a>3.3.1.copy (1) 副本</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&amp; <span class="keyword">operator</span>= (<span class="type">const</span> vector&amp; x);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-2-move-2-移动"><a href="#3-3-2-move-2-移动" class="headerlink" title="3.3.2.move (2) 移动"></a>3.3.2.move (2) 移动</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&amp; <span class="keyword">operator</span>= (vector&amp;&amp; x);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-3-initializer-list-3-初始值设定项列表"><a href="#3-3-3-initializer-list-3-初始值设定项列表" class="headerlink" title="3.3.3.initializer list (3) 初始值设定项列表"></a>3.3.3.initializer list (3) 初始值设定项列表</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&amp; <span class="keyword">operator</span>= (initializer_list&lt;value_type&gt; il);</span><br></pre></td></tr></table></figure>
+
+<p>下面也是使用一段代码来深入了解赋值重载的应用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; v1&#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">9</span>, <span class="number">4</span> &#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; v2;</span><br><span class="line">    v2 = v1;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;::iterator it = v2.<span class="built_in">begin</span>();<span class="comment">//(1)</span></span><br><span class="line">    <span class="keyword">while</span> (it != v2.<span class="built_in">end</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; *it &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        it++;</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; v3&#123; <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span> &#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; v4;</span><br><span class="line">    v4 = <span class="built_in">move</span>(v3);<span class="comment">//(2)</span></span><br><span class="line"></span><br><span class="line">    vector&lt;<span class="type">double</span>&gt; v5;</span><br><span class="line">    v5 = &#123; <span class="number">3.14</span>, <span class="number">3.2</span>, <span class="number">4.5</span>, <span class="number">9.0</span>, <span class="number">2.1</span> &#125;;<span class="comment">//(3)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-迭代器（Iterators）"><a href="#4-迭代器（Iterators）" class="headerlink" title="4.迭代器（Iterators）"></a>4.迭代器（Iterators）</h1><h2 id="4-1-begin"><a href="#4-1-begin" class="headerlink" title="4.1.begin()"></a>4.1.begin()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">begin</span><span class="params">()</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function">const_iterator <span class="title">begin</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-end"><a href="#4-2-end" class="headerlink" title="4.2.end()"></a>4.2.end()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">end</span><span class="params">()</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function">const_iterator <span class="title">end</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-3-rbegin"><a href="#4-3-rbegin" class="headerlink" title="4.3.rbegin()"></a>4.3.rbegin()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">reverse_iterator <span class="title">rbegin</span><span class="params">()</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function">const_reverse_iterator <span class="title">rbegin</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-4-rend"><a href="#4-4-rend" class="headerlink" title="4.4.rend()"></a>4.4.rend()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">reverse_iterator <span class="title">rend</span><span class="params">()</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function">const_reverse_iterator <span class="title">rend</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>同样使用一些例子来演示一下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; v1 = &#123; <span class="number">1</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span> &#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;::iterator it = v1.<span class="built_in">begin</span>();</span><br><span class="line">    <span class="keyword">while</span> (it != v1.<span class="built_in">end</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; (*(it++))++ &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> in : v1)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; in &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    vector&lt;<span class="type">float</span>&gt; v2 = &#123; <span class="number">1.2</span>, <span class="number">3.0</span>, <span class="number">4.3</span>, <span class="number">0.4</span> &#125;;</span><br><span class="line">    <span class="keyword">auto</span> rit = v2.<span class="built_in">rbegin</span>();</span><br><span class="line">    <span class="keyword">while</span> (rit != v2.<span class="built_in">rend</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; *rit &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        rit++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除此之外还有一些常量迭代器（<code>cbegin()</code>、<code>cend()、``crbegin()</code>、<code>crend()</code>），这里就不一一介绍使用了，和之前讲解的<code>string</code>类的迭代器类似。</p>
+<h1 id="5-容积（Capacity）"><a href="#5-容积（Capacity）" class="headerlink" title="5.容积（Capacity）"></a>5.容积（Capacity）</h1><h2 id="5-1-size-与capacity-与max-size"><a href="#5-1-size-与capacity-与max-size" class="headerlink" title="5.1.size()与capacity()与max_size()"></a>5.1.size()与capacity()与max_size()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">size_type <span class="title">size</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function">size_type <span class="title">capacity</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function">size_type <span class="title">max_size</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;<span class="comment">//这个函数是被写死了，没啥用，之前string类里也有提到</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-3-resize-与reserve-与shrink-to-fit"><a href="#5-3-resize-与reserve-与shrink-to-fit" class="headerlink" title="5.3.resize()与reserve()与shrink_to_fit()"></a>5.3.resize()与reserve()与shrink_to_fit()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">resize</span> <span class="params">(size_type n)</span></span>;<span class="function"><span class="type">void</span> <span class="title">resize</span> <span class="params">(size_type n, <span class="type">const</span> value_type&amp; val)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reserve</span> <span class="params">(size_type n)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">shrink_to_fit</span><span class="params">()</span></span>;<span class="comment">//缩小容量来适应对象的实际大小，不过不建议使用，这是异地缩容，以时间换空间</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-4-empty"><a href="#5-4-empty" class="headerlink" title="5.4.empty()"></a>5.4.empty()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>判空，没什么好说的。</p>
+<h1 id="6-元素访问（Element-access）"><a href="#6-元素访问（Element-access）" class="headerlink" title="6.元素访问（Element access）"></a>6.元素访问（Element access）</h1><h2 id="6-1-operator-与at"><a href="#6-1-operator-与at" class="headerlink" title="6.1.operator[]()与at()"></a>6.1.operator[]()与at()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reference <span class="keyword">operator</span>[] (size_type n);</span><br><span class="line">const_reference <span class="keyword">operator</span>[] (size_type n) <span class="type">const</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">reference <span class="title">at</span> <span class="params">(size_type n)</span></span>;</span><br><span class="line"><span class="function">const_reference <span class="title">at</span> <span class="params">(size_type n)</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>不过在使用<code>[]</code>的时候需要注意，<code>[]</code>内部有<code>assert()</code>检查，不得超过<code>size()</code>的值，因此和数组有些不同的是，哪怕提前开辟好空间，也没有办法直接使用<code>[]</code>访问。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//错误写法</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">    v.<span class="built_in">reserve</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        v[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//正确写法</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">    v.<span class="built_in">reserve</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        v.<span class="built_in">push_back</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; v[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者调用<code>resize()</code>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">    v.<span class="built_in">resize</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">size</span>(); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        v[i] = i;</span><br><span class="line">        cout &lt;&lt; v[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-2-front-与back"><a href="#6-2-front-与back" class="headerlink" title="6.2.front()与back()"></a>6.2.front()与back()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">reference <span class="title">front</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">const_reference <span class="title">front</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">reference <span class="title">back</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">const_reference <span class="title">back</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>返回首尾元素的引用。</p>
+<h2 id="6-3-data"><a href="#6-3-data" class="headerlink" title="6.3.data()"></a>6.3.data()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">value_type* <span class="title">data</span><span class="params">()</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function"><span class="type">const</span> value_type* <span class="title">data</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>返回指向<code>vector</code>内部用于存储其拥有元素的内存数组的直接指针。</p>
+<h1 id="7-修改器（Modifiers）"><a href="#7-修改器（Modifiers）" class="headerlink" title="7.修改器（Modifiers）"></a>7.修改器（Modifiers）</h1><h2 id="7-1-assign"><a href="#7-1-assign" class="headerlink" title="7.1.assign()"></a>7.1.assign()</h2><h2 id="7-2-push-back-和pop-back"><a href="#7-2-push-back-和pop-back" class="headerlink" title="7.2.push_back()和pop_back()"></a>7.2.push_back()和pop_back()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">push_back</span> <span class="params">(<span class="type">const</span> value_type&amp; val)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">push_back</span> <span class="params">(value_type&amp;&amp; val)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-4-insert"><a href="#7-4-insert" class="headerlink" title="7.4.insert()"></a>7.4.insert()</h2><h3 id="7-4-1-single-element-1-单元素"><a href="#7-4-1-single-element-1-单元素" class="headerlink" title="7.4.1.single element (1) 单元素"></a>7.4.1.single element (1) 单元素</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">insert</span> <span class="params">(const_iterator position, <span class="type">const</span> value_type&amp; val)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-4-2-fill-2-填充"><a href="#7-4-2-fill-2-填充" class="headerlink" title="7.4.2.fill (2) 填充"></a>7.4.2.fill (2) 填充</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">insert</span> <span class="params">(const_iterator position, size_type n, <span class="type">const</span> value_type&amp; val)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-4-3-range-3-范围"><a href="#7-4-3-range-3-范围" class="headerlink" title="7.4.3.range (3) 范围"></a>7.4.3.range (3) 范围</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">InputIterator</span>&gt;</span><br><span class="line"><span class="function">iterator <span class="title">insert</span> <span class="params">(const_iterator position, InputIterator first, InputIterator last)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-4-4-move-4-移动"><a href="#7-4-4-move-4-移动" class="headerlink" title="7.4.4.move (4) 移动"></a>7.4.4.move (4) 移动</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">insert</span> <span class="params">(const_iterator position, value_type&amp;&amp; val)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-4-5-initializer-list-5-初始值设定项列表"><a href="#7-4-5-initializer-list-5-初始值设定项列表" class="headerlink" title="7.4.5.initializer list (5) 初始值设定项列表"></a>7.4.5.initializer list (5) 初始值设定项列表</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">insert</span> <span class="params">(const_iterator position, initializer_list&lt;value_type&gt; il)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-5-erase-和clear"><a href="#7-5-erase-和clear" class="headerlink" title="7.5.erase()和clear()"></a>7.5.erase()和clear()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">erase</span> <span class="params">(const_iterator position)</span></span>;<span class="comment">//擦除一个元素</span></span><br><span class="line"><span class="function">iterator <span class="title">erase</span> <span class="params">(const_iterator first, const_iterator last)</span></span>;<span class="comment">//擦除范围内的元素</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">clear</span><span class="params">()</span> <span class="keyword">noexcept</span></span>;<span class="comment">//删除所有的元素，使得size()值位0，但是不清楚capacity()的值</span></span><br></pre></td></tr></table></figure>
+
+<p>我们借此测试一下<code>vector</code>的扩容机制：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        v.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;size = &quot;</span> &lt;&lt; v.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; <span class="string">&quot;capacity = &quot;</span> &lt;&lt; v.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//在VS2022下大概是1.5倍对齐，如果是Linux的G++有大概是2倍，当然要根据不同平台和编译器来决定</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>补充：我们可以看到<code>vector</code>类模板没有设计头插和头删的接口，因为这两个接口的效率很低，并且实在是需要如此操作，可以使用<code>insert()</code>来做到。</p>
+</blockquote>
+<h2 id="7-6-swap"><a href="#7-6-swap" class="headerlink" title="7.6.swap()"></a>7.6.swap()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span> <span class="params">(vector&amp; x)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>vector</code>还自己写了一个<code>swap()</code>，同样也是对比全局的<code>std::swap()</code>更加高效一些。</p>
+<h2 id="7-7-emplace-和emplace-back"><a href="#7-7-emplace-和emplace-back" class="headerlink" title="7.7.emplace()和emplace_back()"></a>7.7.emplace()和emplace_back()</h2><p>这两个暂时不用理会，前者使用起来和<code>insert()</code>类似，后者和<code>push_back</code>类似。在某些场景下效率高一些，需要使用的时候再来查询文档把。</p>
+<h1 id="8-配置器（Allocator）"><a href="#8-配置器（Allocator）" class="headerlink" title="8.配置器（Allocator）"></a>8.配置器（Allocator）</h1><p>以后再提及</p>
+<h1 id="9-非成员函数重载（Non-menber-function-overloads）"><a href="#9-非成员函数重载（Non-menber-function-overloads）" class="headerlink" title="9.非成员函数重载（Non-menber function overloads）"></a>9.非成员函数重载（Non-menber function overloads）</h1><p>主要是关系运算符的重载：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Alloc</span>&gt;</span><br><span class="line">  <span class="type">bool</span> <span class="keyword">operator</span>== (<span class="type">const</span> vector&lt;T,Alloc&gt;&amp; lhs, <span class="type">const</span> vector&lt;T,Alloc&gt;&amp; rhs);</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Alloc</span>&gt;</span><br><span class="line">  <span class="type">bool</span> <span class="keyword">operator</span>!= (<span class="type">const</span> vector&lt;T,Alloc&gt;&amp; lhs, <span class="type">const</span> vector&lt;T,Alloc&gt;&amp; rhs);</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Alloc</span>&gt;</span><br><span class="line">  <span class="type">bool</span> <span class="keyword">operator</span>&lt;  (<span class="type">const</span> vector&lt;T,Alloc&gt;&amp; lhs, <span class="type">const</span> vector&lt;T,Alloc&gt;&amp; rhs);</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Alloc</span>&gt;</span><br><span class="line">  <span class="type">bool</span> <span class="keyword">operator</span>&lt;= (<span class="type">const</span> vector&lt;T,Alloc&gt;&amp; lhs, <span class="type">const</span> vector&lt;T,Alloc&gt;&amp; rhs);</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Alloc</span>&gt;</span><br><span class="line">  <span class="type">bool</span> <span class="keyword">operator</span>&gt;  (<span class="type">const</span> vector&lt;T,Alloc&gt;&amp; lhs, <span class="type">const</span> vector&lt;T,Alloc&gt;&amp; rhs);</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Alloc</span>&gt;</span><br><span class="line">  <span class="type">bool</span> <span class="keyword">operator</span>&gt;= (<span class="type">const</span> vector&lt;T,Alloc&gt;&amp; lhs, <span class="type">const</span> vector&lt;T,Alloc&gt;&amp; rhs);</span><br></pre></td></tr></table></figure>
+
+<p>还有一个交换内容用的<code>swap()</code>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Alloc</span>&gt;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">swap</span> <span class="params">(vector&lt;T,Alloc&gt;&amp; x, vector&lt;T,Alloc&gt;&amp; y)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="10-相关练习题目"><a href="#10-相关练习题目" class="headerlink" title="10.相关练习题目"></a>10.相关练习题目</h1><h2 id="10-1-二叉树的前序遍历"><a href="#10-1-二叉树的前序遍历" class="headerlink" title="10.1.二叉树的前序遍历"></a>10.1.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-preorder-traversal/">二叉树的前序遍历</a></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">void</span> _preorderTraversal(TreeNode* root, vector&lt;<span class="type">int</span>&gt;&amp; v)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        v.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        _preorderTraversal(root-&gt;left, v);</span><br><span class="line">        _preorderTraversal(root-&gt;right, v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode* root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">        _preorderTraversal(root, v);</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-2-只出现一次的数字"><a href="#10-2-只出现一次的数字" class="headerlink" title="10.2.只出现一次的数字"></a>10.2.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/single-number/">只出现一次的数字</a></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">singleNumber</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> number = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> in : nums)</span><br><span class="line">        &#123;</span><br><span class="line">            number ^= in;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> number;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-3-杨辉三角"><a href="#10-3-杨辉三角" class="headerlink" title="10.3.杨辉三角"></a>10.3.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/pascals-triangle/">杨辉三角</a></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">generate</span>(<span class="type">int</span> numRows)<span class="comment">//numRows=5</span></span><br><span class="line">    &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">vs</span>(numRows);<span class="comment">//该容器，每一个元素都是一个容器</span></span><br><span class="line">        vs[<span class="number">0</span>].<span class="built_in">resize</span>(<span class="number">1</span>);</span><br><span class="line">        vs[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;<span class="comment">//1</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numRows - <span class="number">1</span>; i++)<span class="comment">//vs[0]-&gt;vs[4]，每一次都要由本层算出下一层</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= i; j++)<span class="comment">//vs[i][0]-&gt;vs[i][i]</span></span><br><span class="line">            &#123;</span><br><span class="line">                vs[i + <span class="number">1</span>].<span class="built_in">resize</span>(i + <span class="number">2</span>);<span class="comment">//开辟好下一层的空间，并且宝藏首尾都是元素1</span></span><br><span class="line"></span><br><span class="line">                vs[i + <span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>;<span class="comment">//下一层的首尾都为1</span></span><br><span class="line">                vs[i + <span class="number">1</span>][i + <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (j != <span class="number">0</span> &amp;&amp; j != i + <span class="number">1</span>)<span class="comment">//保证不是下一层的首位的情况下</span></span><br><span class="line">                &#123;</span><br><span class="line">                    vs[i + <span class="number">1</span>][j] = vs[i][j - <span class="number">1</span>] + vs[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vs;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>补充1：另外我们发现<code>vector</code>没有<code>find()</code>系列的函数，这是为什么呢？因为在以后要介绍的算法库中就有相关的接口，即<code>std::find()</code>。</p>
+<p>而<code>string</code>类也可以使用这个，但是它依旧有一个自己的<code>fund()</code>，一是因为出现比较早，二是这个<code>std::fund()</code>不够满足<code>string</code>类的需求（比如查找子串）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; v = &#123; <span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;;</span><br><span class="line">    <span class="keyword">auto</span> it = <span class="built_in">find</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="number">4</span>);</span><br><span class="line">    <span class="keyword">if</span> (it != v.<span class="built_in">end</span>())</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;找到了！&quot;</span> &lt;&lt; * it &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;没有找到！&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意2：实际上不仅没有<code>find()</code>系列，很多的容器也没有提供流插入和流提取，直接打印这些容器比较少（打印<code>string</code>比较多）</p>
+</blockquote>
+<h2 id="10-4-电话号码的字母组合"><a href="#10-4-电话号码的字母组合" class="headerlink" title="10.4.电话号码的字母组合"></a>10.4.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">电话号码的字母组合</a></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* numToStr_Arr[<span class="number">10</span>] = &#123; <span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;abc&quot;</span>,<span class="string">&quot;def&quot;</span>,<span class="string">&quot;ghi&quot;</span>,<span class="string">&quot;jkl&quot;</span>,<span class="string">&quot;mno&quot;</span>,<span class="string">&quot;pqrs&quot;</span>,<span class="string">&quot;tuv&quot;</span>,<span class="string">&quot;wxyz&quot;</span> &#125;;<span class="comment">//“数字-&gt;字母”的映射表</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">void</span> _combine(string digits, <span class="type">int</span> i, string combineStr, vector&lt;string&gt;&amp; ret)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(i == digits.<span class="built_in">size</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            ret.<span class="built_in">push_back</span>(combineStr);</span><br><span class="line">            <span class="keyword">return</span>;<span class="comment">//拼好了</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> num = digits[i] - <span class="string">&#x27;0&#x27;</span>;<span class="comment">//取得数字&#x27;2&#x27;</span></span><br><span class="line">        string str = numToStr_Arr[num];<span class="comment">//str=&quot;abc&quot;</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ch : str)<span class="comment">//分别取得&#x27;a&#x27;、&#x27;b&#x27;、&#x27;c&#x27;</span></span><br><span class="line">        &#123;</span><br><span class="line">            _combine(digits, i + <span class="number">1</span>, combineStr + ch, ret);<span class="comment">//_combine(digits, 1, &#x27;a&#x27;, ret)</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">letterCombinations</span><span class="params">(<span class="type">const</span> string digits)</span><span class="comment">//digits=&quot;258&quot;</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//digits是数字序列</span></span><br><span class="line">        <span class="comment">//ret是结果顺序表</span></span><br><span class="line">        vector&lt;string&gt; ret;</span><br><span class="line">        <span class="keyword">if</span>(digits.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;</span><br><span class="line">        string combineStr;</span><br><span class="line">        _combine(digits, <span class="number">0</span>, combineStr, ret);</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/12/01/011+limou+2023_8_11+C++%E7%9A%84string%E7%B1%BB%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/12/01/013+limou+2023_8_12+C++%E7%9A%84list%E7%B1%BB%E6%A8%A1%E6%9D%BF/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-vector%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1.vector简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%88%90%E5%91%98%E7%B1%BB%E5%9E%8B%EF%BC%88Member-types%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">2.成员类型（Member types）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%EF%BC%88Member-function%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">3.成员函数（Member function）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0vector"><span class="nav-number">3.1.</span> <span class="nav-text">3.1.构造函数vector()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-default-1-%E9%BB%98%E8%AE%A4"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1.default (1) 默认</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-fill-2-%E5%A1%AB%E5%85%85"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2.fill (2) 填充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-range-3-%E8%8C%83%E5%9B%B4"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3.range (3) 范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-4-copy-4-%E5%89%AF%E6%9C%AC"><span class="nav-number">3.1.4.</span> <span class="nav-text">3.1.4.copy (4) 副本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-5-move-5-%E7%A7%BB%E5%8A%A8-%EF%BC%885%EF%BC%89"><span class="nav-number">3.1.5.</span> <span class="nav-text">3.1.5.move (5) 移动 （5）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-6-initializer-list-6-%E5%88%9D%E5%A7%8B%E5%80%BC%E8%AE%BE%E5%AE%9A%E9%A1%B9%E5%88%97%E8%A1%A8-%EF%BC%886%EF%BC%89"><span class="nav-number">3.1.6.</span> <span class="nav-text">3.1.6.initializer list (6) 初始值设定项列表 （6）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-vecter"><span class="nav-number">3.2.</span> <span class="nav-text">3.2.析构函数~vecter()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E8%B5%8B%E5%80%BC%E9%87%8D%E8%BD%BD"><span class="nav-number">3.3.</span> <span class="nav-text">3.3.赋值重载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-copy-1-%E5%89%AF%E6%9C%AC"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.3.1.copy (1) 副本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-move-2-%E7%A7%BB%E5%8A%A8"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.3.2.move (2) 移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-initializer-list-3-%E5%88%9D%E5%A7%8B%E5%80%BC%E8%AE%BE%E5%AE%9A%E9%A1%B9%E5%88%97%E8%A1%A8"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.3.3.initializer list (3) 初始值设定项列表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%88Iterators%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">4.迭代器（Iterators）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-begin"><span class="nav-number">4.1.</span> <span class="nav-text">4.1.begin()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-end"><span class="nav-number">4.2.</span> <span class="nav-text">4.2.end()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-rbegin"><span class="nav-number">4.3.</span> <span class="nav-text">4.3.rbegin()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-rend"><span class="nav-number">4.4.</span> <span class="nav-text">4.4.rend()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%AE%B9%E7%A7%AF%EF%BC%88Capacity%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">5.容积（Capacity）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-size-%E4%B8%8Ecapacity-%E4%B8%8Emax-size"><span class="nav-number">5.1.</span> <span class="nav-text">5.1.size()与capacity()与max_size()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-resize-%E4%B8%8Ereserve-%E4%B8%8Eshrink-to-fit"><span class="nav-number">5.2.</span> <span class="nav-text">5.3.resize()与reserve()与shrink_to_fit()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-empty"><span class="nav-number">5.3.</span> <span class="nav-text">5.4.empty()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E5%85%83%E7%B4%A0%E8%AE%BF%E9%97%AE%EF%BC%88Element-access%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">6.元素访问（Element access）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-operator-%E4%B8%8Eat"><span class="nav-number">6.1.</span> <span class="nav-text">6.1.operator[]()与at()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-front-%E4%B8%8Eback"><span class="nav-number">6.2.</span> <span class="nav-text">6.2.front()与back()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-data"><span class="nav-number">6.3.</span> <span class="nav-text">6.3.data()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%88Modifiers%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">7.修改器（Modifiers）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-assign"><span class="nav-number">7.1.</span> <span class="nav-text">7.1.assign()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-push-back-%E5%92%8Cpop-back"><span class="nav-number">7.2.</span> <span class="nav-text">7.2.push_back()和pop_back()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4-insert"><span class="nav-number">7.3.</span> <span class="nav-text">7.4.insert()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-1-single-element-1-%E5%8D%95%E5%85%83%E7%B4%A0"><span class="nav-number">7.3.1.</span> <span class="nav-text">7.4.1.single element (1) 单元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-2-fill-2-%E5%A1%AB%E5%85%85"><span class="nav-number">7.3.2.</span> <span class="nav-text">7.4.2.fill (2) 填充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-3-range-3-%E8%8C%83%E5%9B%B4"><span class="nav-number">7.3.3.</span> <span class="nav-text">7.4.3.range (3) 范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-4-move-4-%E7%A7%BB%E5%8A%A8"><span class="nav-number">7.3.4.</span> <span class="nav-text">7.4.4.move (4) 移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-5-initializer-list-5-%E5%88%9D%E5%A7%8B%E5%80%BC%E8%AE%BE%E5%AE%9A%E9%A1%B9%E5%88%97%E8%A1%A8"><span class="nav-number">7.3.5.</span> <span class="nav-text">7.4.5.initializer list (5) 初始值设定项列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-5-erase-%E5%92%8Cclear"><span class="nav-number">7.4.</span> <span class="nav-text">7.5.erase()和clear()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-6-swap"><span class="nav-number">7.5.</span> <span class="nav-text">7.6.swap()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-7-emplace-%E5%92%8Cemplace-back"><span class="nav-number">7.6.</span> <span class="nav-text">7.7.emplace()和emplace_back()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E9%85%8D%E7%BD%AE%E5%99%A8%EF%BC%88Allocator%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">8.配置器（Allocator）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-%E9%9D%9E%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%EF%BC%88Non-menber-function-overloads%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">9.非成员函数重载（Non-menber function overloads）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E7%9B%B8%E5%85%B3%E7%BB%83%E4%B9%A0%E9%A2%98%E7%9B%AE"><span class="nav-number">10.</span> <span class="nav-text">10.相关练习题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-number">10.1.</span> <span class="nav-text">10.1.二叉树的前序遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">10.2.</span> <span class="nav-text">10.2.只出现一次的数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92"><span class="nav-number">10.3.</span> <span class="nav-text">10.3.杨辉三角</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88"><span class="nav-number">10.4.</span> <span class="nav-text">10.4.电话号码的字母组合</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

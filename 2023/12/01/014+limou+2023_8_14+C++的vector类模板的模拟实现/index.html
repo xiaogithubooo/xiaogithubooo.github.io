@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="下面代码是有关于vector的一些基础实现，和库里的函数可能有较大的不同，但是基本可以实现vector的很多功能。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/12/01/014+limou+2023_8_14+C++%E7%9A%84vector%E7%B1%BB%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="下面代码是有关于vector的一些基础实现，和库里的函数可能有较大的不同，但是基本可以实现vector的很多功能。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-12-01T08:34:49.474Z">
+<meta property="article:modified_time" content="2023-08-24T16:21:12.894Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2023/12/01/014+limou+2023_8_14+C++的vector类模板的模拟实现/"/>
+
+
+
+
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/01/014+limou+2023_8_14+C++%E7%9A%84vector%E7%B1%BB%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-12-01T16:34:49+08:00">
+                2023-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>下面代码是有关于<code>vector</code>的一些基础实现，和库里的函数可能有较大的不同，但是基本可以实现<code>vector</code>的很多功能。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">看源代码不要上来就一行一行看，先看文档再进行使用，再整理框架（梳理类、变量、接口），然后“连蒙带猜”验证细节</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">namespace</span> limou</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">vector</span></span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="keyword">typedef</span> T* iterator;</span><br><span class="line">        <span class="keyword">typedef</span> <span class="type">const</span> T* const_iterator;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="comment">//1.Menber function</span></span><br><span class="line">        <span class="built_in">vector</span>()</span><br><span class="line">            : _start(<span class="literal">nullptr</span>)</span><br><span class="line">            , _finish(<span class="literal">nullptr</span>)</span><br><span class="line">            , _end_of_storage(<span class="literal">nullptr</span>)</span><br><span class="line">        &#123;&#125;</span><br><span class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> InputIterator&gt;<span class="comment">//这里之所以又嵌套一个类模板的原因是：能够使用多种种类的迭代器，而不当当是T类型的迭代器</span></span><br><span class="line">        <span class="built_in">vector</span>(InputIterator first, InputIterator last)</span><br><span class="line">            : _start(<span class="literal">nullptr</span>)</span><br><span class="line">            , _finish(<span class="literal">nullptr</span>)</span><br><span class="line">            , _end_of_storage(<span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (first != last)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">push_back</span>(*first);</span><br><span class="line">                ++first;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>(<span class="type">const</span> vector&lt;T&gt;&amp; v)</span><br><span class="line">            : _start(<span class="literal">nullptr</span>)</span><br><span class="line">            , _finish(<span class="literal">nullptr</span>)</span><br><span class="line">            , _end_of_storage(<span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">reserve</span>(v.<span class="built_in">capacity</span>());</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; e : v)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">push_back</span>(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>(<span class="type">size_t</span> n, <span class="type">const</span> T&amp; val = <span class="built_in">T</span>())<span class="comment">//构造一个匿名对象，并且自动初始化</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">reserve</span>(n);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">push_back</span>(val);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>(<span class="type">int</span> n, <span class="type">const</span> T&amp; val = <span class="built_in">T</span>())<span class="comment">//这个函数是专门给部分类型准备的（比如int）不重载就会调用成迭代器初始化</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">reserve</span>(n);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">push_back</span>(val);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;T&gt;&amp; <span class="keyword">operator</span>=(vector tmp)<span class="comment">//先拷贝一份，另外这里提一嘴，在类里面写成vector和vector&lt;T&gt;是一样的，当然我们建议写全</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">swap</span>(tmp);</span><br><span class="line">            <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ~<span class="built_in">vector</span>()</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">delete</span>[] _start;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//2.Iterator</span></span><br><span class="line">        <span class="function">iterator <span class="title">begin</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> _start;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">iterator <span class="title">end</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> _finish;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">const_iterator <span class="title">begin</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> _start;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">const_iterator <span class="title">end</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> _finish;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//3.Capacity</span></span><br><span class="line">        <span class="function"><span class="type">size_t</span> <span class="title">size</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> _finish - _start;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">size_t</span> <span class="title">capacity</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> _end_of_storage - _start;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//3.1.使用memcpy()会引发深浅拷贝的问题，因此不可以使用这个函数</span></span><br><span class="line">        <span class="comment">//void reserve(size_t n)</span></span><br><span class="line">        <span class="comment">//&#123;</span></span><br><span class="line">        <span class="comment">//    if (n &gt; capacity())//如果指定的数字大于现有容量就扩容</span></span><br><span class="line">        <span class="comment">//    &#123;</span></span><br><span class="line">        <span class="comment">//        T* tmp = new T[n];</span></span><br><span class="line">        <span class="comment">//        size_t sz = size();</span></span><br><span class="line">        <span class="comment">//        if (_start)//如果不是空容器</span></span><br><span class="line">        <span class="comment">//        &#123;</span></span><br><span class="line">        <span class="comment">//            memcpy(tmp, _start, sizeof(T) * sz);</span></span><br><span class="line">        <span class="comment">//            delete[] _start;//这里有可能因为浅拷贝而出事</span></span><br><span class="line">        <span class="comment">//        &#125;</span></span><br><span class="line">        <span class="comment">//        _start = tmp;//由于这里更换成了tmp</span></span><br><span class="line">        <span class="comment">//        _finish = tmp + sz;//而这里原本的_finish是指向别的空间指针，所以必须要修改</span></span><br><span class="line">        <span class="comment">//        _end_of_storage = tmp + n;//同理这里也做修改</span></span><br><span class="line">        <span class="comment">//    &#125;</span></span><br><span class="line">        <span class="comment">//&#125;</span></span><br><span class="line">        <span class="comment">//3.2.拷贝数据如果使用拷贝构造</span></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">reserve</span><span class="params">(<span class="type">size_t</span> n)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (n &gt; <span class="built_in">capacity</span>())<span class="comment">//如果指定的数字大于现有容量就扩容</span></span><br><span class="line">            &#123;</span><br><span class="line">                T* tmp = <span class="keyword">new</span> T[n];</span><br><span class="line">                <span class="type">size_t</span> sz = <span class="built_in">size</span>();</span><br><span class="line">                <span class="keyword">if</span> (_start)<span class="comment">//如果不是空容器</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">//memcpy(tmp, _start, sizeof(T) * sz);</span></span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; sz; i++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        tmp[i] = _start[i];</span><br><span class="line">                        <span class="comment">//这样子做可以自动调用不同类型的深拷贝（赋值运算重载），</span></span><br><span class="line">                        <span class="comment">//这个深拷贝有可能是我们写的也有可能是库里的……</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">delete</span>[] _start;</span><br><span class="line">                &#125;</span><br><span class="line">                _start = tmp;<span class="comment">//由于这里更换成了tmp</span></span><br><span class="line">                _finish = _start + sz;<span class="comment">//而这里原本的_finish是指向别的空间指针，所以必须要修改</span></span><br><span class="line">                _end_of_storage = _start + n;<span class="comment">//同理这里也做修改</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//3.3.当然，还有一种方法是使用引用计数，不过这个方法我们暂时不讲（这个地方如果是类似string类型使用引用计数效率就会有很大的提高）</span></span><br><span class="line">        <span class="comment">//3.4.另外，库中的实现使用了拷贝构造，因为人家使用的是定位new，因此可以调用，而我们自己是直接使用new的，已经存在两个对象了，只能使用赋值重载</span></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">resize</span><span class="params">(<span class="type">size_t</span> n, <span class="type">const</span> T&amp; val = T())</span></span></span><br><span class="line"><span class="function">            <span class="comment">//这里给了默认匿名参数T()，</span></span></span><br><span class="line"><span class="function">            <span class="comment">//注意匿名对象具有常属性，</span></span></span><br><span class="line"><span class="function">            <span class="comment">//这也是为什么在C++之后支持“int i = int(3);”</span></span></span><br><span class="line"><span class="function">            <span class="comment">//这种语法就是因为：</span></span></span><br><span class="line"><span class="function">            <span class="comment">//在类模板出现后没有办法确认是内置类型，还是自定义类型</span></span></span><br><span class="line"><span class="function">            <span class="comment">//并且还会给与自定义类型默认值</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (n &lt;= <span class="built_in">size</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                _finish = _start + n;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">reserve</span>(n);</span><br><span class="line">            <span class="keyword">while</span> (_finish &lt; _start + n)</span><br><span class="line">            &#123;</span><br><span class="line">                *_finish = val;</span><br><span class="line">                _finish++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//4.Element access</span></span><br><span class="line">        T&amp; <span class="keyword">operator</span>[](<span class="type">size_t</span> pos)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">assert</span>(pos &lt; <span class="built_in">size</span>());</span><br><span class="line">            <span class="keyword">return</span> _start[pos];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">const</span> T&amp; <span class="keyword">operator</span>[](<span class="type">size_t</span> pos) <span class="type">const</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">assert</span>(pos &lt; <span class="built_in">size</span>());</span><br><span class="line">            <span class="keyword">return</span> _start[pos];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//5.Modifiers</span></span><br><span class="line">        <span class="comment">//注意insert()和erase()在使用过后迭代器都会失效，在库中就可以利用返回值来解决这个问题，我们自己实现的就没有实现insert()的返回值</span></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">push_back</span><span class="params">(<span class="type">const</span> T&amp; x)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">//if (_finish == _end_of_storage)//如果容量不足</span></span><br><span class="line">            <span class="comment">//&#123;</span></span><br><span class="line">            <span class="comment">//    reserve(capacity() == 0 ? 4 : capacity() * 2);//2倍容量</span></span><br><span class="line">            <span class="comment">//&#125;</span></span><br><span class="line">            <span class="comment">//*_finish = x;</span></span><br><span class="line">            <span class="comment">//_finish++;</span></span><br><span class="line">            <span class="built_in">insert</span>(<span class="built_in">end</span>(), x);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(iterator pos, <span class="type">const</span> T&amp; x)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">//检验是否合法</span></span><br><span class="line">            <span class="built_in">assert</span>(pos &gt;= _start);</span><br><span class="line">            <span class="built_in">assert</span>(pos &lt;= _finish);</span><br><span class="line">            <span class="keyword">if</span> (_finish == _end_of_storage)<span class="comment">//如果容量不足</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">size_t</span> len = pos - _start;</span><br><span class="line">                <span class="built_in">reserve</span>(<span class="built_in">capacity</span>() == <span class="number">0</span> ? <span class="number">4</span> : <span class="built_in">capacity</span>() * <span class="number">2</span>);<span class="comment">//2倍容量</span></span><br><span class="line">                pos = _start + len;</span><br><span class="line">                <span class="comment">//上面这里还解决了迭代器失效的问题。</span></span><br><span class="line">                <span class="comment">//由于扩容导致的问题，pos指向旧空间的某个位置时，</span></span><br><span class="line">                <span class="comment">//旧空间没了，没能指向新空间，因此这里必须进行更新。</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//但是由于这里没有办法使用引用（传过来的pos迭代器是一个值），</span></span><br><span class="line">                <span class="comment">//因此本函数insert()使用过后迭代器就会失效，只能保证在本函数内有效。</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            iterator end = _finish - <span class="number">1</span>;</span><br><span class="line">            <span class="comment">//1,2,3,4,5</span></span><br><span class="line">           <span class="comment">//^       ^</span></span><br><span class="line">            <span class="keyword">while</span> (end &gt;= pos)</span><br><span class="line">            &#123;</span><br><span class="line">                *(end + <span class="number">1</span>) = *end;</span><br><span class="line">                end--;</span><br><span class="line">            &#125;</span><br><span class="line">            *pos = x;</span><br><span class="line">            _finish++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//1.第一种erase的书写解决不了迭代器失效的问题</span></span><br><span class="line">        <span class="comment">//void erase(iterator pos)</span></span><br><span class="line">        <span class="comment">//&#123;</span></span><br><span class="line">        <span class="comment">//    //检验是否合法</span></span><br><span class="line">        <span class="comment">//    assert(pos &gt;= _start);</span></span><br><span class="line">        <span class="comment">//    assert(pos &lt;= _finish);</span></span><br><span class="line">        <span class="comment">//    //&#123;1,2,3,4,5&#125;</span></span><br><span class="line">        <span class="comment">//    //pos-&gt;3,it-&gt;4,&#123;1,2,4,5&#125;</span></span><br><span class="line">        <span class="comment">//    //&#123;1&#125;,pos-&gt;1,it=_finish</span></span><br><span class="line">        <span class="comment">//    iterator it = pos + 1;</span></span><br><span class="line">        <span class="comment">//    while (it &lt; _finish)</span></span><br><span class="line">        <span class="comment">//    &#123;</span></span><br><span class="line">        <span class="comment">//        *(it - 1) = *it;</span></span><br><span class="line">        <span class="comment">//        it++;</span></span><br><span class="line">        <span class="comment">//    &#125;</span></span><br><span class="line">        <span class="comment">//    --_finish;</span></span><br><span class="line">        <span class="comment">//&#125;</span></span><br><span class="line">        <span class="comment">//2.第二种可以解决迭代器失效的问题，返回的是原pos的后一个数据的迭代器，也就是删除后pos的位置</span></span><br><span class="line">        <span class="function">iterator <span class="title">erase</span><span class="params">(iterator pos)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">//检验是否合法</span></span><br><span class="line">            <span class="built_in">assert</span>(pos &gt;= _start);</span><br><span class="line">            <span class="built_in">assert</span>(pos &lt;= _finish);</span><br><span class="line">            <span class="comment">//&#123;1,2,3,4,5&#125;</span></span><br><span class="line">            <span class="comment">//pos-&gt;3,it-&gt;4,&#123;1,2,4,5&#125;</span></span><br><span class="line">            <span class="comment">//&#123;1&#125;,pos-&gt;1,it=_finish</span></span><br><span class="line">            iterator it = pos + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (it &lt; _finish)</span><br><span class="line">            &#123;</span><br><span class="line">                *(it - <span class="number">1</span>) = *it;</span><br><span class="line">                it++;</span><br><span class="line">            &#125;</span><br><span class="line">            --_finish;</span><br><span class="line">            <span class="keyword">return</span> pos;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//6.other</span></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; v)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            std::<span class="built_in">swap</span>(_start, v._start);</span><br><span class="line">            std::<span class="built_in">swap</span>(_finish, v._finish);</span><br><span class="line">            std::<span class="built_in">swap</span>(_end_of_storage, v._end_of_storage);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="comment">//三个迭代器成员变量</span></span><br><span class="line">        iterator _start;<span class="comment">//指向“存储空间”或者“存储”开始的位置</span></span><br><span class="line">        iterator _finish;<span class="comment">//指向“存储”结束的位置</span></span><br><span class="line">        iterator _end_of_storage;<span class="comment">//指向“存储空间”结束的位置</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">test_1</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v1;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            v1.<span class="built_in">push_back</span>(i);</span><br><span class="line">            std::cout &lt;&lt; v1[i]++ &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;::iterator it = v1.<span class="built_in">begin</span>();</span><br><span class="line">        <span class="keyword">while</span> (it != v1.<span class="built_in">end</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; (*it++)++ &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> in : v1)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; in &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">const</span> vector&lt;<span class="type">float</span>&gt; v2;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//for (int i = 0; i &lt; 10; i++)</span></span><br><span class="line">        <span class="comment">//&#123;</span></span><br><span class="line">        <span class="comment">//    v2.push_back((float)i + 0.1);</span></span><br><span class="line">        <span class="comment">//    std::cout &lt;&lt; v2[i]++ &lt;&lt; &quot; &quot;;</span></span><br><span class="line">        <span class="comment">//&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">test_2</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v1;</span><br><span class="line">        v1.<span class="built_in">resize</span>(<span class="number">5</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> in : v1)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; in &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        vector&lt;<span class="type">int</span>*&gt; v2;</span><br><span class="line">        v2.<span class="built_in">resize</span>(<span class="number">5</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> p : v2)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; (<span class="type">void</span>*)p &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        vector&lt;std::string&gt; v3;</span><br><span class="line">        v3.<span class="built_in">resize</span>(<span class="number">5</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> str3 : v3)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;空字符=[&quot;</span> &lt;&lt; str3 &lt;&lt; <span class="string">&quot;]&quot;</span> &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        vector&lt;std::string&gt; v4;</span><br><span class="line">        v4.<span class="built_in">resize</span>(<span class="number">5</span>, <span class="string">&quot;abcd&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> str4 : v4)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;字符=[&quot;</span> &lt;&lt; str4 &lt;&lt; <span class="string">&quot;]&quot;</span> &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">test_3</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v1;</span><br><span class="line">        v1.<span class="built_in">insert</span>(v1.<span class="built_in">begin</span>(), <span class="number">1</span>);</span><br><span class="line">        v1.<span class="built_in">insert</span>(v1.<span class="built_in">begin</span>() + <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">        v1.<span class="built_in">insert</span>(v1.<span class="built_in">begin</span>() + <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> in : v1)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; in &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">test_4</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v1;</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">1</span>);<span class="comment">//内部使用了一次insert()因此迭代器失效</span></span><br><span class="line">        std::cout &lt;&lt; v1[v1.<span class="built_in">size</span>() - <span class="number">1</span>] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">2</span>);<span class="comment">//但是又重新使用insert()的时候重新计算了迭代器，使用后迭代器又失效了</span></span><br><span class="line">        std::cout &lt;&lt; v1[v1.<span class="built_in">size</span>() - <span class="number">1</span>] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">3</span>);</span><br><span class="line">        std::cout &lt;&lt; v1[v1.<span class="built_in">size</span>() - <span class="number">1</span>] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v2;</span><br><span class="line">        v2.<span class="built_in">insert</span>(v2.<span class="built_in">begin</span>(), <span class="number">1</span>);<span class="comment">//内部使用了一次insert()因此迭代器失效</span></span><br><span class="line">        std::cout &lt;&lt; v2[v2.<span class="built_in">size</span>() - <span class="number">1</span>] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        v2.<span class="built_in">insert</span>(v2.<span class="built_in">begin</span>(), <span class="number">2</span>);<span class="comment">//但是又重新使用insert()的时候重新计算了迭代器，使用后迭代器又失效了</span></span><br><span class="line">        std::cout &lt;&lt; v2[v2.<span class="built_in">size</span>() - <span class="number">2</span>] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        v2.<span class="built_in">insert</span>(v2.<span class="built_in">begin</span>(), <span class="number">3</span>);</span><br><span class="line">        std::cout &lt;&lt; v2[v2.<span class="built_in">size</span>() - <span class="number">3</span>] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//错误示例（因为迭代器失效）</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v3;</span><br><span class="line">        v3.<span class="built_in">insert</span>(v3.<span class="built_in">begin</span>(), <span class="number">4</span>);</span><br><span class="line">        v3.<span class="built_in">insert</span>(v3.<span class="built_in">begin</span>(), <span class="number">3</span>);</span><br><span class="line">        v3.<span class="built_in">insert</span>(v3.<span class="built_in">begin</span>(), <span class="number">2</span>);</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;::iterator it = v3.<span class="built_in">begin</span>();</span><br><span class="line">        v3.<span class="built_in">insert</span>(it, <span class="number">1</span>);<span class="comment">//这个语句过后迭代器失效了</span></span><br><span class="line">        v3.<span class="built_in">insert</span>(it, <span class="number">0</span>);</span><br><span class="line">        v3.<span class="built_in">insert</span>(it, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; v3[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">test_5</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">////1.使用erase()的时候一般不会出现迭代器失效的问题</span></span><br><span class="line">        <span class="comment">//vector&lt;int&gt; v;</span></span><br><span class="line">        <span class="comment">//v.push_back(0);</span></span><br><span class="line">        <span class="comment">//std::cout &lt;&lt; v[0] &lt;&lt; std::endl;</span></span><br><span class="line">        <span class="comment">//v.erase(v.begin());</span></span><br><span class="line">        <span class="comment">//v.push_back(1);</span></span><br><span class="line">        <span class="comment">//v.push_back(2);</span></span><br><span class="line">        <span class="comment">//v.push_back(3);</span></span><br><span class="line">        <span class="comment">//v.push_back(4);</span></span><br><span class="line">        <span class="comment">//vector&lt;int&gt;::iterator it = v.begin();</span></span><br><span class="line">        <span class="comment">//while (it != v.end())</span></span><br><span class="line">        <span class="comment">//&#123;</span></span><br><span class="line">        <span class="comment">//    std::cout &lt;&lt; *it &lt;&lt; &quot; &quot;;</span></span><br><span class="line">        <span class="comment">//    it++;</span></span><br><span class="line">        <span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.但是有一种情况会很危险</span></span><br><span class="line">        <span class="comment">//假设我们要删除一组数据中的偶数</span></span><br><span class="line">        <span class="comment">//可以试一下数据</span></span><br><span class="line">        <span class="comment">//&#123;1,2,3,4,5&#125;正常</span></span><br><span class="line">        <span class="comment">//&#123;1,2,3,4,5,6&#125;奔溃</span></span><br><span class="line">        <span class="comment">//&#123;2,2,3,4,5&#125;结果不对</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; vbug;</span><br><span class="line">        vbug.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">        vbug.<span class="built_in">push_back</span>(<span class="number">2</span>);</span><br><span class="line">        vbug.<span class="built_in">push_back</span>(<span class="number">3</span>);</span><br><span class="line">        vbug.<span class="built_in">push_back</span>(<span class="number">4</span>);</span><br><span class="line">        vbug.<span class="built_in">push_back</span>(<span class="number">5</span>);</span><br><span class="line">        vbug.<span class="built_in">push_back</span>(<span class="number">6</span>);</span><br><span class="line">        vbug.<span class="built_in">push_back</span>(<span class="number">7</span>);</span><br><span class="line">        vbug.<span class="built_in">push_back</span>(<span class="number">8</span>);</span><br><span class="line">        vbug.<span class="built_in">push_back</span>(<span class="number">9</span>);</span><br><span class="line">        vbug.<span class="built_in">push_back</span>(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">auto</span> it = vbug.<span class="built_in">begin</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1.错误使用</span></span><br><span class="line">        <span class="comment">//while (it != vbug.end())</span></span><br><span class="line">        <span class="comment">//&#123;</span></span><br><span class="line">        <span class="comment">//    if (*it % 2 == 0)</span></span><br><span class="line">        <span class="comment">//    &#123;</span></span><br><span class="line">        <span class="comment">//        vbug.erase(it);</span></span><br><span class="line">        <span class="comment">//    &#125;</span></span><br><span class="line">        <span class="comment">//    //对于&#123;1,2,3,4,5,6,7,8,9,10&#125;</span></span><br><span class="line">        <span class="comment">//    //当最后一步只剩下&#123;1,3,5,7,9,10&#125;的时候</span></span><br><span class="line">        <span class="comment">//    //it-&gt;10,_finish-&gt;10后面的空间，因此在erase的时候，删除10的步骤就是_finish--</span></span><br><span class="line">        <span class="comment">//    //但是循环条件处的end()指向的位置还是原本的_finish位置</span></span><br><span class="line">        <span class="comment">//    it++;</span></span><br><span class="line">        <span class="comment">//    //而上面的一步又使得it++,it-&gt;旧的_finish</span></span><br><span class="line">        <span class="comment">//    //而回到循环条件的时候end()重新进行了计算（更新为新的_finish--）</span></span><br><span class="line">        <span class="comment">//    //此时it和end()错位，*it访问了野指针</span></span><br><span class="line">        <span class="comment">//  //导致迭代器失效</span></span><br><span class="line">        <span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//for (auto e : vbug)</span></span><br><span class="line">        <span class="comment">//&#123;</span></span><br><span class="line">        <span class="comment">//    std::cout &lt;&lt; e &lt;&lt; &quot; &quot;;</span></span><br><span class="line">        <span class="comment">//&#125;</span></span><br><span class="line">        <span class="comment">//std::cout &lt;&lt; std::endl;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.debug后</span></span><br><span class="line">        <span class="keyword">while</span> (it != vbug.<span class="built_in">end</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (*it % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                vbug.<span class="built_in">erase</span>(it);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (it == vbug.<span class="built_in">end</span>())</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            it++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> e : vbug)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; e &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.使用总结</span></span><br><span class="line">        <span class="comment">//但是实际上如果数据存在连续的偶数，即使是debug后的版本也会出现问题（上面代码能过只是巧合）</span></span><br><span class="line">        <span class="comment">//因此在后期就会引入一些智能指针的解决方案</span></span><br><span class="line">        <span class="comment">//因此我们认为使用erase()后会导致之前的迭代器失效</span></span><br><span class="line">     &#125;</span><br><span class="line">    <span class="comment">//关于迭代器失效的其中一个解决方案就是修改返回值的类型</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">test_6</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">        v.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">        v.<span class="built_in">push_back</span>(<span class="number">2</span>);</span><br><span class="line">        v.<span class="built_in">push_back</span>(<span class="number">2</span>);</span><br><span class="line">        v.<span class="built_in">push_back</span>(<span class="number">3</span>);</span><br><span class="line">        v.<span class="built_in">push_back</span>(<span class="number">4</span>);</span><br><span class="line">        v.<span class="built_in">push_back</span>(<span class="number">5</span>);</span><br><span class="line">        v.<span class="built_in">push_back</span>(<span class="number">6</span>);</span><br><span class="line">        v.<span class="built_in">push_back</span>(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;::iterator it = v.<span class="built_in">begin</span>();</span><br><span class="line">        <span class="keyword">while</span> (it != v.<span class="built_in">end</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (*it % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                it = v.<span class="built_in">erase</span>(it);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                it++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; v.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; v[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">test_7</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;std::string&gt; v1;</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="string">&quot;1111111111111111111111&quot;</span>);</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="string">&quot;1111111111111111111111&quot;</span>);</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="string">&quot;1111111111111111111111&quot;</span>);</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="string">&quot;1111111111111111111111&quot;</span>);</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="string">&quot;1111111111111111111111&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> e : v1)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; e &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">test_8</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v1;</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">2</span>);</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">3</span>);</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">4</span>);</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">5</span>);</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v2</span><span class="params">(v1)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; e : v1)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; e &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; e : v2)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; e &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v3;</span><br><span class="line">        v3 = v2;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; e : v3)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; e &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">test_9</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v1;</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">2</span>);</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">3</span>);</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">4</span>);</span><br><span class="line">        v1.<span class="built_in">push_back</span>(<span class="number">5</span>);</span><br><span class="line">        <span class="function">std::string <span class="title">str</span><span class="params">(<span class="string">&quot;abcdef&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v2</span><span class="params">(v1.begin(), v1.end())</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; v2.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; v2[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v3</span><span class="params">(str.begin() + <span class="number">1</span>, str.end() - <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; v3.<span class="built_in">size</span>(); j++)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; v3[j] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">test_10</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">10</span>, <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="function">vector&lt;std::string&gt; <span class="title">v2</span><span class="params">(<span class="number">5</span>, <span class="string">&quot;xxxx&quot;</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; v1.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; v1[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; v2.<span class="built_in">size</span>(); j++)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; v2[j] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">vector没有流重载，因为很奇怪，您无法知道按照什么样的格式进行输出和输入</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/12/01/013+limou+2023_8_12+C++%E7%9A%84list%E7%B1%BB%E6%A8%A1%E6%9D%BF/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/12/01/015+limou+2023_8_17+C++%E7%9A%84list%E7%B1%BB%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
